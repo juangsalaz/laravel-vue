@@ -17,18 +17,24 @@
                   <tbody>
                     <tr>
                         <th>ID</th>
-                        <th>Name</th>
+                        <th>First Name</th>
+                        <th>Last Name</th>
+                        <th>Title</th>
+                        <th>Phone Number</th>
                         <th>Email</th>
-                        <th>Type</th>
+                        <th>Role</th>
                         <th>Registered At</th>
                         <th>Modify</th>
                   </tr> 
 
                   <tr v-for="user in users" :key="user.id">
                     <td>{{ user.id }}</td>
-                    <td>{{ user.name }}</td>
+                    <td>{{ user.first_name }}</td>
+                    <td>{{ user.last_name }}</td>
+                    <td>{{ user.title }}</td>
+                    <td>{{ user.tel_mobile }}</td>
                     <td>{{ user.email }}</td>
-                    <td>{{ user.type | strToUpper}}</td>
+                    <td>{{ user.role }}</td>
                     <td>{{ user.created_at | formatDate}}</td>
 
                     <td>
@@ -70,10 +76,34 @@
 <form @submit.prevent="editMode ? updateUser() : createUser()">
 <div class="modal-body">
      <div class="form-group">
-        <input v-model="form.name" type="text" name="name"
-            placeholder="Name"
-            class="form-control" :class="{ 'is-invalid': form.errors.has('name') }">
-        <has-error :form="form" field="name"></has-error>
+        <input v-model="form.first_name" type="text" name="first_name"
+            placeholder="First Name"
+            class="form-control" :class="{ 'is-invalid': form.errors.has('first_name') }">
+        <has-error :form="form" field="first_name"></has-error>
+    </div>
+
+    <div class="form-group">
+        <input v-model="form.last_name" type="text" name="last_name"
+            placeholder="Last Name"
+            class="form-control" :class="{ 'is-invalid': form.errors.has('last_name') }">
+        <has-error :form="form" field="last_name"></has-error>
+    </div>
+
+    <div class="form-group">
+        <select name="title" v-model="form.title" id="title" class="form-control" :class="{ 'is-invalid': form.errors.has('title') }">
+            <option value="" selected>Select User Title</option>
+            <option value="Mr">Mr</option>
+            <option value="Mrs">Mrs</option>
+            <option value="Mis">Mis</option>
+        </select>
+        <has-error :form="form" field="title"></has-error>
+    </div>
+
+    <div class="form-group">
+        <input v-model="form.tel_mobile" type="text" name="tel_mobile"
+            placeholder="Phone Number"
+            class="form-control" :class="{ 'is-invalid': form.errors.has('tel_mobile') }">
+        <has-error :form="form" field="tel_mobile"></has-error>
     </div>
 
      <div class="form-group">
@@ -91,13 +121,13 @@
     </div>
 
     <div class="form-group">
-        <select name="type" v-model="form.type" id="type" class="form-control" :class="{ 'is-invalid': form.errors.has('type') }">
-            <option value="">Select User Role</option>
+        <select name="role" v-model="form.role" id="role" class="form-control" :class="{ 'is-invalid': form.errors.has('role') }">
+            <option value="" selected>Select User Role</option>
             <option value="admin">Admin</option>
             <option value="user">Standard User</option>
             <option value="author">Author</option>
         </select>
-        <has-error :form="form" field="type"></has-error>
+        <has-error :form="form" field="role"></has-error>
     </div>
 
 </div>
@@ -124,10 +154,13 @@
                 users: {},
                 form: new Form({
                     id: '',
-                    name : '',
+                    first_name : '',
+                    last_name : '',
+                    title : '',
+                    tel_mobile : '',
                     email: '',
                     password: '',
-                    type: '',
+                    role: ''
 
                 })
             }

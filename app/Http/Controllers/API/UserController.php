@@ -27,13 +27,19 @@ class UserController extends Controller
     public function store(Request $request)
     {
         $this->validate($request, [
-            'name' => 'required',
+            'first_name' => 'required',
+            'last_name' => 'required',
+            'title' => 'required',
+            'tel_mobile' => 'required',
             'email' => 'required',
             'role' => 'required',
         ]);
 
         return User::create([
-           'name' => $request['name'],
+           'first_name' => $request['first_name'],
+           'last_name' => $request['last_name'],
+           'title' => $request['title'],
+           'tel_mobile' => $request['tel_mobile'],
            'email' => $request['email'],
            'password' => \Hash::make($request['password']),
            'role' => $request['role'],
@@ -61,10 +67,14 @@ class UserController extends Controller
     public function update(Request $request, $id)
     {
         $this->validate($request, [
-            'name' => 'required',
+            'first_name' => 'required',
+            'last_name' => 'required',
+            'title' => 'required',
+            'tel_mobile' => 'required',
             'email' => 'required',
             'role' => 'required',
         ]);
+
 
         $user = User::findOrFail($id);
 
