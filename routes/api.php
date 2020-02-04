@@ -21,7 +21,11 @@ use Illuminate\Http\Request;
 
 Route::apiResources(
 	[
-		'user' => 'API\UserController'
+		'user' => 'API\UserController',
+		// 'user_department' => 'API\UserDepartmentController'
 	]
 );
+
+Route::get('user_department', 'API\UserDepartmentController@index')->name('user_list');
+Route::get('user_department/get_users', 'API\UserDepartmentController@getDataUser')->name('user_list');
 
